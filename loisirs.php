@@ -1,7 +1,7 @@
 <?php
-require 'header.php';
 $title= "Loisirs";
 $meta = "Compétences en programmation web";
+require 'header.php';
 ?>
 
     <ul>

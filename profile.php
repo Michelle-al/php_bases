@@ -1,7 +1,7 @@
 <?php
-require 'header.php';
 $title= "Profile";
-$meta = "Carte de visite que l'on peut retrouver sur Gitthub";
+$meta = "Profil également disponible sur Github";
+require 'header.php';
 ?>
 
 <p>I'm a passionate web developer</p>

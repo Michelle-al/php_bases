@@ -13,9 +13,9 @@
             <nav>
                 <ul>
                     <li><a href="index.php">Accueil</a></li>
-                    <li><a href="profile.php">Profile</a></li>
-                    <li><a href="loisirs.php">Loisir</a></li>
-                    <li><a href="competences.php">Compétences</a></li>
+                    <li><a href="index.php?page=profile">Profile</a></li>
+                    <li><a href="index.php?page=loisirs">Loisirs</a></li>
+                    <li><a href="index.php?page=competences">Compétences</a></li>
                 </ul>
             </nav>
         </header>

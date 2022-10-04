@@ -1,7 +1,8 @@
 <?php
-require 'header.php';
 $title= "Compétences";
 $meta = "Compétences en programmation web";
+require 'header.php';
+
 ?>
 <p>
     <a href="https://www.w3.org/html/" target="_blank" rel="noreferrer">
