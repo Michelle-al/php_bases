@@ -8,24 +8,25 @@ session_start();
 $message='';
 $msg_message ='';
 $msg_info ='';
+$msg_title="";
+$doc="";
 
 if(!empty($_POST))
 {
-
     $_SESSION =
         array(
-            'title' => $_POST['title'],
-            'firstname' => $_POST['firstname'],
-            'lastname' => $_POST['lastname'],
-            'email' => $_POST['email'],
-            'info' => $_POST['info'],
-            'message' => $_POST['message']
+            'title' => htmlspecialchars($_POST['title'], ENT_QUOTES),
+            'firstname' => htmlspecialchars($_POST['firstname'], ENT_QUOTES),
+            'lastname' => htmlspecialchars($_POST['lastname'], ENT_QUOTES),
+            'email' => htmlspecialchars($_POST['email'], ENT_QUOTES),
+            'info' => htmlspecialchars($_POST['info'], ENT_QUOTES),
+            'message' => htmlspecialchars($_POST['message'], ENT_QUOTES, "UTF-8")
         );
 
     //Traitement du formulaire
 
-    if(empty($_POST['title'])){
-        $msg = "Merci de remplir ce champ";
+    if(empty($_POST['firstname'])){
+        $msg_title = "Merci de sélectionner la civilité";
         $message='<div class="alert alert-danger mb-5">Merci de remplir les champs indiqués</div>';
     }
     if(empty($_POST['firstname'])){
@@ -54,12 +55,15 @@ if(!empty($_POST))
 
 }
 if(empty($message) && empty($content)){
-    $messages = "<div>Formulaire validé</div>";
+    $message = "<div>Formulaire validé</div>";
+    $doc = implode(PHP_EOL,$_SESSION);
+    file_put_contents('form.txt', $doc, FILE_APPEND);
+    unset($_SESSION);
 }
 
 ?>
 <h1 class="text-center mb-5">Me contacter</h1>
-
+<?= $message?>
 <form action="contact.php" method="post">
     <form>
         <select class="form-select" id = "title" aria-label="Default select example" name="title">
@@ -67,7 +71,7 @@ if(empty($message) && empty($content)){
             <option value="mr" <?= (isset($_POST['title']) && $_POST['title'] == "mr") ? "selected" : ""?> >Monsieur</option>
             <option value="mme" <?= (isset($_POST['title']) && $_POST['title'] == "mme") ? "selected" : ""?> >Madame</option>
         </select>
-        <p class="small "><small class="text-danger"><?=(isset($_POST) && ($_POST['title'] == "vide")) ? $msg : "" ?></small></p>
+        <p class="small "><small class="text-danger"><?=(isset($_POST) && ($_POST['title'] == "vide")) ? $msg_title : "" ?></small></p>
         <div class="mb-3">
             <label for="lastname" class="form-label">Nom</label>
             <input type="text" class="form-control" id="lastname" name="lastname" value="<?= (isset($_POST['lastname'])) ? $_SESSION['lastname'] : "" ?>">
